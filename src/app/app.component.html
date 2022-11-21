@@ -1,0 +1,92 @@
+<header class="header">
+  <div class="container">
+    <div class="header__wrap">
+      <div class="logo">
+        <img class="logo__img" src="assets/images/logo.png" alt="Logo">
+      </div>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li class="nav__item"><a class="nav__item-link black" href="#main">Главная</a></li>
+          <li class="nav__item"><a class="nav__item-link black" href="#cars">Автомобили</a></li>
+          <li class="nav__item"><a class="nav__item-link black" href="#booking">Бронирование авто</a></li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</header>
+<section class="main" id="main" [ngStyle]="bgPos">
+  <div class="container">
+    <h1 class="main__title mb">Аренда премиальных автомобилей</h1>
+    <div class="main__description mb">
+      В нашем клубе имеется солидная коллекция спортивных автомобилей — от достаточно распространенных серийных
+      машин до настоящего гоночного эксклюзива. Воспользуйтесь уникальной возможностью побывать за рулем настоящей
+      легенды и узнать, на что она способна за пределами гоночной трассы!
+    </div>
+    <button class="main__link btn" (click)="goScroll(cars)">Посмотреть автомобили</button>
+  </div>
+</section>
+<section class="cars" id="cars" #cars>
+  <div class="container">
+    <h2 class="cars__title title mb">Наш автопарк</h2>
+    <div class="cars-toggle">
+      <div [ngClass]="{active: category === 'sport'}" (click)="toggleCategory('sport')">Sport</div>
+      <div [ngClass]="{active: category === 'luxury'}" (click)="toggleCategory('luxury')">Luxury</div>
+    </div>
+    <div class="cars__catalog">
+      <ul class="cars__list">
+        <li class="cars__item" *ngFor="let car of carsData">
+          <img class="cars__item-image" src="{{car.image}}" alt="image {{car.alt}}">
+          <h4 class="cars__item-title">{{car.name}}</h4>
+          <ul class="cars__details">
+            <li class="cars__details-item">
+              <img class="cars__details-icon" src="assets/images/gear.svg" alt="icon gear">
+              <div class="cars__details-description"><span class="bold">Привод</span> {{car.gear}}</div>
+            </li>
+            <li class="cars__details-item">
+              <img class="cars__details-icon" src="assets/images/wheel.svg" alt="icon wheel">
+              <div class="cars__details-description"><span class="bold">Двигатель</span> {{car.engine}} л.с.</div>
+            </li>
+            <li class="cars__details-item">
+              <img class="cars__details-icon" src="assets/images/belt.svg" alt="icon belt">
+              <div class="cars__details-description"><span class="bold">Кол-во мест</span> {{car.places}}</div>
+            </li>
+          </ul>
+          <button class="cars__item-btn btn" (click)="goScroll(booking, car)">Забронировать</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+<section class="booking" id="booking" #booking>
+  <div class="container">
+    <h2 class="booking__title title">Узнать цену и забронировать</h2>
+    <div class="booking__description">Заполните данные, и мы перезвоним вам для уточнения всех деталей
+      бронирования
+    </div>
+    <form class="booking__form" action="" [formGroup]="bookingForm">
+      <input class="booking__form-input" id="name" type="text" placeholder="Ваше имя" formControlName="name">
+      <input class="booking__form-input" id="phone" type="text" placeholder="Ваш телефон" formControlName="phone">
+      <select class="booking__form-input" id="car" name="car" id="car" formControlName="car">
+        <option value="">Автомобиль, который вас интересует</option>
+        <option value="Lamborghini Huracan Spyder">Lamborghini Huracan Spyder</option>
+        <option value="Chevrolet Corvette">Chevrolet Corvette</option>
+        <option value="Ferrari California">Ferrari California</option>
+        <option value="Lamborghini Urus">Lamborghini Urus</option>
+        <option value="Audi R8">Audi R8</option>
+        <option value="Chevrolet Camaro">Chevrolet Camaro</option>
+      </select>
+      <button class="booking__btn btn" type="button" (click)="onSubmit()" [disabled]="!bookingForm.valid">Узнать цену
+      </button>
+    </form>
+    <img class="booking__image" src="assets/images/rolls.png" alt="image rolls" [ngStyle]="trans">
+  </div>
+</section>
+<footer class="footer">
+  <div class="container">
+    <div class="footer__wrap">
+      <div class="logo">
+        <img class="logo__img" src="assets/images/logo.png" alt="Logo">      </div>
+      <div class="copyright">Все права защищены</div>
+    </div>
+  </div>
+</footer>
